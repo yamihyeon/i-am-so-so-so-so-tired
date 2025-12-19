@@ -1,10 +1,8 @@
-<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>바이올렛 에버가든: 사회적 탐구</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
@@ -16,7 +14,8 @@
         }
 
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'N<!DOCTYPE html>
+oto Sans KR', sans-serif;
             background-color: var(--stationery-beige);
             color: var(--ink-black);
             scroll-behavior: smooth;
@@ -60,7 +59,9 @@
             opacity: 0.6;
         }
 
-        .serif { font-family: 'Noto Serif KR', serif; }
+        .serif {
+            font-family: 'Noto Serif KR', serif;
+        }
 
         .reveal {
             opacity: 0;
@@ -84,19 +85,29 @@
             overflow: hidden;
         }
 
+        .photo-frame:hover {
+            transform: scale(1.02) rotate(-1deg);
+        }
+
         .slide-img {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0;
             transition: opacity 1.2s ease-in-out;
         }
 
-        .slide-img.active { opacity: 1; position: relative; }
+        .slide-img.active {
+            opacity: 1;
+            position: relative;
+        }
 
         .section-divider {
-            width: 80px; height: 2px;
+            width: 80px;
+            height: 2px;
             background: var(--antique-gold);
             margin: 2rem 0;
         }
@@ -108,59 +119,122 @@
         }
 
         #side-nav {
-            position: fixed; left: 3.5rem; top: 50%;
+            position: fixed;
+            left: 3.5rem;
+            top: 50%;
             transform: translateY(-50%);
             z-index: 90;
-            display: flex; flex-direction: column; gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
             padding: 25px 15px;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
             border-radius: 40px;
             border: 1.5px solid rgba(197, 160, 89, 0.5);
             box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-            transition: opacity 1s ease;
+            transition: opacity 1s ease, transform 0.5s ease;
+            opacity: 1;
         }
 
-        #side-nav.idle { opacity: 0.2; }
-        #side-nav:hover { opacity: 1 !important; }
+        #side-nav.idle {
+            opacity: 0.2;
+        }
+
+        #side-nav:hover {
+            opacity: 1 !important;
+        }
 
         .nav-dot {
-            width: 18px; height: 18px;
+            width: 18px;
+            height: 18px;
             background-color: rgba(58, 53, 48, 0.25);
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.4s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+        }
+
+        .nav-dot:hover {
+            background-color: var(--antique-gold);
+            transform: scale(1.2);
+        }
+
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--ink-black);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .nav-dot.active {
             background-color: var(--antique-gold);
             height: 45px;
             border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.4);
         }
 
-        /* 음악 재생 컨트롤러 */
+        /* 음악 재생 컨트롤러 스타일 */
         #music-control {
-            position: fixed; bottom: 3.5rem; right: 3.5rem;
+            position: fixed;
+            bottom: 3.5rem;
+            right: 3.5rem;
             z-index: 100;
-            display: flex; align-items: center; gap: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             background: rgba(255, 255, 255, 0.9);
             padding: 8px 16px;
             border-radius: 50px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.15);
             backdrop-filter: blur(8px);
             border: 1.5px solid var(--antique-gold);
+            transition: transform 0.3s ease;
+        }
+
+        #music-control:hover {
+            transform: translateY(-5px);
         }
 
         .music-btn {
             background: var(--antique-gold);
-            color: white; border-radius: 50%;
-            width: 40px; height: 40px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; border: none;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: background 0.2s;
         }
 
-        .hidden { display: none; }
+        .music-btn:hover {
+            background: #b08d4a;
+        }
+
+        .music-info {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--ink-black);
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -172,51 +246,109 @@
         <a href="#fashion" class="nav-dot" data-label="복식 문화"></a>
     </nav>
 
-    <!-- 음악 컨트롤러 -->
+    <!-- [음악 재생 컨트롤러 UI] -->
     <div id="music-control">
-        <div class="text-sm font-medium mr-2">Sincerely - TRUE</div>
+        <div class="music-info">Sincerely - TRUE</div>
         <button id="play-pause-btn" class="music-btn">
-            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <!-- Play Icon -->
+            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <!-- Pause Icon (Initially Hidden) -->
+            <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
         </button>
-        <!-- [중요] MP3 파일명을 본인의 파일명으로 정확히 수정하세요 -->
+        <!-- 오디오 객체 (업로드된 파일 ID 1번 사용) -->
         <audio id="bgm" loop>
-            <source src="sincerely.mp3" type="audio/mpeg">
+            <source src="하하.mp3" type="audio/mpeg">
         </audio>
     </div>
 
+    <!-- 1. 애니메이션 소개 -->
     <section class="min-h-screen flex items-center px-12 py-24" id="intro">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div class="reveal active">
                 <h1 class="serif text-5xl md:text-6xl font-bold leading-tight mb-6">바이올렛 에버가든</h1>
                 <div class="section-divider"></div>
-                <p class="text-lg opacity-90">전쟁의 병기였던 소녀가 '사랑해'의 의미를 찾아가는 여정.</p>
+                <div class="text-lg leading-relaxed opacity-90">
+                    <p class="mb-6">교토 애니메이션에서 제작한 이 작품은 전쟁의 도구로만 살아온 소녀 바이올렛이 '자동 수기 인형'이라는 대필가가 되어 성장하는 과정을 그립니다.</p>
+                    <p>타인의 마음을 편지로 옮기며, 그녀는 자신이 마지막으로 들었던 말인 '사랑해'의 의미를 찾아가는 깊은 울림의 휴먼 드라마입니다.</p>
+                </div>
             </div>
             <div class="reveal active">
                 <div class="photo-frame">
-                    <img src="https://url.kr/ayr9lp" alt="Main" class="w-full">
+                    <img src="https://url.kr/ayr9lp" alt="바이올렛 에버가든 메인" class="w-full h-auto">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 추가 섹션들... (스크롤을 위해 최소한의 내용 유지) -->
+    <!-- 2. 서구 유럽 배경 및 19세기 산업화 -->
     <section class="min-h-screen flex items-center bg-black/5 px-12 py-24" id="era">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div class="reveal">
-                <h2 class="serif text-4xl font-bold mb-6">산업화의 물결</h2>
+            <div class="md:order-2 reveal">
+                <h2 class="serif text-4xl font-bold mb-6 italic">서구 유럽의 풍경과<br>19세기의 산업화</h2>
                 <div class="section-divider"></div>
-                <p>19세기 유럽을 배경으로 한 아름다운 풍경.</p>
+                <div class="text-lg leading-relaxed opacity-90 space-y-4">
+                    <p>라이덴샤프트리히는 19세기 서구 유럽, 특히 산업 혁명기의 영국과 독일을 연상시킵니다. 붉은 벽돌 건물과 가스등이 켜진 거리는 당시 유럽 도시의 전형적인 미학을 담고 있습니다.</p>
+                    <p>거대한 증기선이 항구를 가로지르고 철도가 도시를 잇는 모습은 농경 중심에서 공업 중심으로 변화하던 역동적인 시대를 상징합니다.</p>
+                </div>
             </div>
-            <div class="photo-frame reveal" id="era-slideshow">
-                <img src="https://i.pinimg.com/736x/54/4a/5c/544a5cd79437f9d355e26b41521e72c9.jpg" class="slide-img active">
-                <img src="https://i.pinimg.com/originals/13/43/85/134385d1fab0bd31af1a843d1e2560b1.png" class="slide-img">
+            <div class="md:order-1 reveal">
+                <div class="photo-frame" id="era-slideshow">
+                    <img src="https://i.pinimg.com/736x/54/4a/5c/544a5cd79437f9d355e26b41521e72c9.jpg" alt="유럽 풍경 1" class="slide-img active">
+                    <img src="https://i.pinimg.com/originals/13/43/85/134385d1fab0bd31af1a843d1e2560b1.png" alt="유럽 풍경 2" class="slide-img">
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- 3. 전쟁의 상흔과 타자기의 진심 -->
+    <section class="min-h-screen flex items-center dark-paper px-12 py-24" id="war-and-tech">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="serif text-4xl font-bold mb-6">전쟁의 도구에서<br>마음을 전하는 인형으로</h2>
+                    <div class="section-divider bg-white/20"></div>
+                    <div class="text-lg leading-relaxed text-stone-300 space-y-6">
+                        <p>바이올렛은 전쟁 중 두 손을 잃고 차가운 금속 의수를 달게 되었으며, 감정조차 느끼지 못하는 '전쟁 병기'로 길러졌습니다. 그 의수로 타자기를 두드리며 사람들의 진심을 기록하기 시작합니다.</p>
+                        <p>이 과정에서 타인과 교감하며 치유하게 됩니다. 이러한 모습을 담은 장면은 전쟁의 비극을 넘어서는 인간애와 진심의 힘을 보여줍니다.</p>
+                    </div>
+                </div>
+                <div class="reveal flex justify-center">
+                    <div class="photo-frame w-full max-w-md" style="border-color: #e2ded0; background: #e2ded0;">
+                        <img src="https://url.kr/gfeino" alt="의수를 한 바이올렛" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 복식 문화 -->
+    <section class="min-h-screen flex items-center px-12 py-24" id="fashion">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="serif text-4xl font-bold mb-6">우아함과 제약: 19세기 복식</h2>
+                <div class="section-divider"></div>
+                <p class="text-lg leading-relaxed opacity-90">
+                    화려한 프릴과 레이스 장식은 당시 서구 유럽의 미학을 보여주며, 당시 여성의 신체를 압박했던 코르셋은 아름다운 외형 뒤에 존재했던 사회적 제약과 엄격한 규범을 상징합니다.
+                </p>
+            </div>
+            <div class="reveal">
+                <div class="photo-frame">
+                    <img src="https://i.pinimg.com/736x/ff/90/fa/ff90fa85cbf150bfb814920b1d921276.jpg" alt="19세기 유럽 복식" class="w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 text-center border-t border-black/5">
+        <p class="serif text-xl opacity-60 mb-4 italic">"모든 편지는 보낼 가치가 있습니다."</p>
+    </footer>
+
     <script>
-        // 음악 관련
+        // [음악 재생 로직]
         const audio = document.getElementById('bgm');
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
@@ -224,7 +356,7 @@
 
         playPauseBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play().catch(e => console.log("파일 확인 필요:", e));
+                audio.play();
                 playIcon.classList.add('hidden');
                 pauseIcon.classList.remove('hidden');
             } else {
@@ -234,12 +366,57 @@
             }
         });
 
-        // 스크롤 애니메이션
+        // [스크롤 및 UI 효과 로직]
+        const sideNav = document.getElementById('side-nav');
         const reveals = document.querySelectorAll('.reveal');
-        window.addEventListener('scroll', () => {
-            reveals.forEach(el => {
-                if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        let idleTimer;
+        function resetIdleTimer() {
+            sideNav.classList.remove('idle');
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                sideNav.classList.add('idle');
+            }, 1500);
+        }
+
+        window.addEventListener('mousemove', resetIdleTimer);
+        window.addEventListener('scroll', resetIdleTimer);
+        window.addEventListener('touchstart', resetIdleTimer);
+        resetIdleTimer();
+
+        function startSlideShow() {
+            const slides = document.querySelectorAll('#era-slideshow .slide-img');
+            if (slides.length <= 1) return;
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 4000);
+        }
+
+        function updateUI() {
+            const scrollPos = window.scrollY + window.innerHeight / 3;
+            reveals.forEach(reveal => {
+                const rect = reveal.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    reveal.classList.add('active');
+                }
             });
+            sections.forEach((section, index) => {
+                if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                    navDots.forEach(dot => dot.classList.remove('active'));
+                    navDots[index].classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateUI);
+        window.addEventListener('load', () => {
+            updateUI();
+            startSlideShow();
         });
     </script>
 </body>
